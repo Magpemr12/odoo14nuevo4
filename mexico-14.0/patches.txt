@@ -1,0 +1,1 @@
+odoo https://github.com/Vauxoo/odoo/pull/436.patch
