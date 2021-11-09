@@ -1,10 +1,12 @@
-from odoo import _, models, api
+from odoo import _, models, api, fields
 from odoo.tools.misc import formatLang, format_date
 from odoo.exceptions import UserError
 
 
 class AccountPayment(models.Model):
     _inherit = "account.payment"
+	payment_date = fields.Date(string='Date', default=fields.Date.context_today, required=True, readonly=True,
+                               states={'draft': [('readonly', False)]}, copy=False, tracking=True)
 
     #@api.multi
     def change_amt_in_word(self):
