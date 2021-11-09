@@ -40,7 +40,7 @@ class ResCurrency(models.Model):
             amount_words += ' 00/100 M.N.'
 
         if not self.is_zero(amount - integer_value):
-            context = self.env.context
+            context = self._context
             params = context.get('params') if 'params' in context else False
             if params and 'model' in params and params.get('model') == 'account.payment' and \
                     'lang' in context and (context.get('lang') == 'es_MX' or context.get('lang') == 'es_ES'):
