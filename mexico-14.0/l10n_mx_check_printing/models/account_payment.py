@@ -5,8 +5,8 @@ from odoo.exceptions import UserError
 
 class AccountPayment(models.Model):
     _inherit = "account.payment"
-    #payment_date = fields.Date(string='Date', default=fields.Date.context_today, required=True, readonly=True,
-     #                          states={'draft': [('readonly', False)]}, copy=False, tracking=True)
+    date = fields.Date(string='Date', default=fields.Date.context_today, required=True, readonly=True,
+                              states={'draft': [('readonly', False)]}, copy=False, tracking=True)
 
     #@api.multi
     def change_amt_in_word(self):
@@ -17,7 +17,7 @@ class AccountPayment(models.Model):
     def do_print_checks(self):
         mx_check_layout = self[0].journal_id.mx_check_layout
         if mx_check_layout != 'disabled':
-            #self.write({'state': 'sent'})
+            self.write({'state': 'sent'})
             return self.env.ref(mx_check_layout).report_action(self)
         if self.company_id.country_id == self.env.ref('base.mx'):
             raise UserError(
@@ -34,8 +34,8 @@ class AccountPayment(models.Model):
         pages = []
         pages.append({
             'sequence_number': self.check_number,
-            #'payment_date': format_date(self.env, self.payment_date,
-            #                            date_format='dd-MMM-YYYY'),
+            'date': format_date(self.env, self.payment_date,
+                                        date_format='dd-MMM-YYYY'),
             'partner_id': self.partner_id,
             'partner_name': (self.partner_id.name or '').upper(),
             'currency': self.currency_id,
