@@ -49,7 +49,7 @@ class TestMXCheckPrinting(AccountingTestCase):
             'active_model': 'account.invoice',
             'active_ids': invoices.ids
         }).create({
-            'payment_date': time.strftime('%Y') + '-07-15',
+            #'payment_date': time.strftime('%Y') + '-07-15',
             'journal_id': self.bank_journal.id,
             'payment_method_id': self.payment_method_check.id,
         })
