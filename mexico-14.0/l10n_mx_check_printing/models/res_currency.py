@@ -10,7 +10,7 @@ except ImportError:
 class ResCurrency(models.Model):
     _inherit = "res.currency"
 
-    @api.multi
+    #@api.multi
     def amount_to_text(self, amount):
         self.ensure_one()
 

@@ -6,12 +6,12 @@ from odoo.exceptions import UserError
 class AccountPayment(models.Model):
     _inherit = "account.payment"
 
-    @api.multi
+    #@api.multi
     def change_amt_in_word(self):
         for record in self:
             record.check_amount_in_words = record.currency_id.amount_to_text(record.amount) if record.currency_id else False
 
-    @api.multi
+    #@api.multi
     def do_print_checks(self):
         mx_check_layout = self[0].journal_id.mx_check_layout
         if mx_check_layout != 'disabled':
